@@ -302,7 +302,7 @@ const adminContent = document.getElementById('adminContent');
 
 if (gateOverlay && gateInput && gateBtn && gateError && adminContent) {
 
-  const ADMIN_CODE = "onibi2026";
+  const ADMIN_CODE = test ;
 
   gateBtn.addEventListener('click', () => {
     if (gateInput.value.trim() === ADMIN_CODE) {
