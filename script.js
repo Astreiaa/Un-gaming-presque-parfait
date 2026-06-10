@@ -10,18 +10,15 @@ const LS_KEY = 'ugpp_responses';
 
 // ── Helpers ────────────────────────────────────────────────────────
 
-/** Lire les réponses depuis localStorage */
 function getResponses() {
   try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; }
   catch { return []; }
 }
 
-/** Sauvegarder les réponses dans localStorage */
 function saveResponses(arr) {
   localStorage.setItem(LS_KEY, JSON.stringify(arr));
 }
 
-/** Formater une date lisible */
 function formatDate(iso) {
   const d = new Date(iso);
   return d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' })
@@ -30,19 +27,16 @@ function formatDate(iso) {
 
 // ── Rating buttons ─────────────────────────────────────────────────
 
-/**
- * Transformer chaque .rating-group en 10 boutons cliquables
- * + un <input hidden> qui porte la valeur pour le submit.
- */
 function initRatingGroups() {
   document.querySelectorAll('.rating-group').forEach(group => {
     const name = group.dataset.name;
-    // Input caché
+
     const input = document.createElement('input');
-    input.type = 'hidden'; input.name = name; input.className = 'rating-input';
+    input.type = 'hidden';
+    input.name = name;
+    input.className = 'rating-input';
     group.appendChild(input);
 
-    // Boutons 1→10
     for (let i = 1; i <= 10; i++) {
       const btn = document.createElement('button');
       btn.type = 'button';
@@ -51,10 +45,8 @@ function initRatingGroups() {
       btn.dataset.value = i;
 
       btn.addEventListener('click', () => {
-        // Mise à jour visuelle
         group.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        // Valeur dans l'input caché
         input.value = i;
       });
 
@@ -75,13 +67,15 @@ function initForm() {
     const data = new FormData(form);
     const entry = { id: Date.now(), date: new Date().toISOString() };
 
-    // Tous les champs texte & radio
     for (const [key, value] of data.entries()) {
       entry[key] = value;
     }
 
-    // Vérifier qu'au moins les notes obligatoires sont remplies
-    const requiredNotes = ['note_accueil','note_ambiance','note_discussions','note_jeu','note_social','note_globale'];
+    const requiredNotes = [
+      'note_accueil','note_ambiance','note_discussions',
+      'note_jeu','note_social','note_globale'
+    ];
+
     for (const n of requiredNotes) {
       if (!entry[n]) {
         alert('Merci de donner une note pour chaque section avant d\'envoyer !');
@@ -89,12 +83,10 @@ function initForm() {
       }
     }
 
-    // Sauvegarder
     const responses = getResponses();
     responses.push(entry);
     saveResponses(responses);
 
-    // Afficher le message de succès
     form.classList.add('hidden');
     const msg = document.getElementById('successMsg');
     msg.classList.remove('hidden');
@@ -104,96 +96,92 @@ function initForm() {
 
 // ── Admin page ─────────────────────────────────────────────────────
 
-/** Champs notés et leurs labels courts */
 const NOTE_FIELDS = [
-  { key: 'note_accueil',     label: 'Accueil' },
-  { key: 'note_ambiance',    label: 'Ambiance' },
+  { key: 'note_accueil', label: 'Accueil' },
+  { key: 'note_ambiance', label: 'Ambiance' },
   { key: 'note_discussions', label: 'Discussions' },
-  { key: 'note_onibi',       label: 'Onibi' },
-  { key: 'note_ares',        label: 'Ares' },
-  { key: 'note_rekirts',     label: 'Rekirts' },
-  { key: 'note_astreia',     label: 'Astreia' },
-  { key: 'note_jeu',         label: 'Session jeu' },
-  { key: 'note_social',      label: 'Expérience sociale' },
-  { key: 'note_globale',     label: 'Note globale' },
+  { key: 'note_onibi', label: 'Onibi' },
+  { key: 'note_ares', label: 'Ares' },
+  { key: 'note_rekirts', label: 'Rekirts' },
+  { key: 'note_astreia', label: 'Astreia' },
+  { key: 'note_jeu', label: 'Session jeu' },
+  { key: 'note_social', label: 'Expérience sociale' },
+  { key: 'note_globale', label: 'Note globale' },
 ];
 
-/** Toutes les sections textuelles pour le détail d'une réponse */
 const SECTIONS = [
   {
     title: '⭐ Accueil', fields: [
-      { key: 'accueil_ressenti',   label: 'Ressenti' },
+      { key: 'accueil_ressenti', label: 'Ressenti' },
       { key: 'accueil_impression', label: 'Première impression' },
-      { key: 'note_accueil',       label: 'Note', isNote: true },
+      { key: 'note_accueil', label: 'Note', isNote: true },
     ]
   },
   {
     title: '😂 Ambiance', fields: [
       { key: 'ambiance_ambiance', label: 'Ambiance' },
-      { key: 'ambiance_vannes',   label: 'Vannes' },
-      { key: 'ambiance_confort',  label: 'Confort vocal' },
-      { key: 'note_ambiance',     label: 'Note', isNote: true },
+      { key: 'ambiance_vannes', label: 'Vannes' },
+      { key: 'ambiance_confort', label: 'Confort vocal' },
+      { key: 'note_ambiance', label: 'Note', isNote: true },
     ]
   },
   {
     title: '🎧 Discussions', fields: [
-      { key: 'disc_sujets',      label: 'Sujets' },
-      { key: 'disc_moment_top',  label: 'Moment préféré' },
-      { key: 'disc_moment_wtf',  label: 'Moment WTF' },
+      { key: 'disc_sujets', label: 'Sujets' },
+      { key: 'disc_moment_top', label: 'Moment préféré' },
+      { key: 'disc_moment_wtf', label: 'Moment WTF' },
       { key: 'note_discussions', label: 'Note', isNote: true },
     ]
   },
   {
     title: '🎭 Casting', fields: [
-      { key: 'onibi_impression',   label: 'Onibi — impression' },
-      { key: 'onibi_vibe',         label: 'Onibi — vibe' },
-      { key: 'note_onibi',         label: 'Onibi — note', isNote: true },
-      { key: 'ares_impression',    label: 'Ares — impression' },
-      { key: 'ares_vibe',          label: 'Ares — vibe' },
-      { key: 'note_ares',          label: 'Ares — note', isNote: true },
+      { key: 'onibi_impression', label: 'Onibi — impression' },
+      { key: 'onibi_vibe', label: 'Onibi — vibe' },
+      { key: 'note_onibi', label: 'Onibi — note', isNote: true },
+      { key: 'ares_impression', label: 'Ares — impression' },
+      { key: 'ares_vibe', label: 'Ares — vibe' },
+      { key: 'note_ares', label: 'Ares — note', isNote: true },
       { key: 'rekirts_impression', label: 'Rekirts — impression' },
-      { key: 'rekirts_vibe',       label: 'Rekirts — vibe' },
-      { key: 'note_rekirts',       label: 'Rekirts — note', isNote: true },
+      { key: 'rekirts_vibe', label: 'Rekirts — vibe' },
+      { key: 'note_rekirts', label: 'Rekirts — note', isNote: true },
       { key: 'astreia_impression', label: 'Astreia — impression' },
-      { key: 'astreia_vibe',       label: 'Astreia — vibe' },
-      { key: 'note_astreia',       label: 'Astreia — note', isNote: true },
+      { key: 'astreia_vibe', label: 'Astreia — vibe' },
+      { key: 'note_astreia', label: 'Astreia — note', isNote: true },
     ]
   },
   {
     title: '🎮 Session jeu', fields: [
-      { key: 'jeu_ressenti',     label: 'Ressenti' },
+      { key: 'jeu_ressenti', label: 'Ressenti' },
       { key: 'jeu_coordination', label: 'Coordination' },
-      { key: 'jeu_chaos',        label: 'Chaos' },
-      { key: 'jeu_moment',       label: 'Moment clutch/honteux' },
-      { key: 'note_jeu',         label: 'Note', isNote: true },
+      { key: 'jeu_chaos', label: 'Chaos' },
+      { key: 'jeu_moment', label: 'Moment clutch/honteux' },
+      { key: 'note_jeu', label: 'Note', isNote: true },
     ]
   },
   {
     title: '🍽️ Expérience sociale', fields: [
-      { key: 'social_confort',     label: 'Confort' },
+      { key: 'social_confort', label: 'Confort' },
       { key: 'social_integration', label: 'Intégration' },
-      { key: 'social_feeling',     label: 'Feeling' },
-      { key: 'note_social',        label: 'Note', isNote: true },
+      { key: 'social_feeling', label: 'Feeling' },
+      { key: 'note_social', label: 'Note', isNote: true },
     ]
   },
   {
     title: '🧁 Avis final', fields: [
-      { key: 'retour',      label: 'Retour ?' },
-      { key: 'resume',      label: 'Résumé' },
-      { key: 'note_globale',label: 'Note globale', isNote: true },
+      { key: 'retour', label: 'Retour ?' },
+      { key: 'resume', label: 'Résumé' },
+      { key: 'note_globale', label: 'Note globale', isNote: true },
       { key: 'commentaire', label: 'Commentaire' },
     ]
   },
 ];
 
-/** Calculer la moyenne d'un champ note sur toutes les réponses */
 function average(responses, key) {
   const vals = responses.map(r => parseFloat(r[key])).filter(v => !isNaN(v));
   if (!vals.length) return null;
   return (vals.reduce((a, b) => a + b, 0) / vals.length).toFixed(1);
 }
 
-/** Construire les stats cards */
 function renderStats(responses) {
   const grid = document.getElementById('statsGrid');
   if (!grid) return;
@@ -212,26 +200,25 @@ function renderStats(responses) {
   });
 }
 
-/** Construire le tableau détaillé d'une réponse */
 function buildResponseTable(entry) {
   let html = '<table class="response-table">';
   SECTIONS.forEach(section => {
     html += `<tr class="section-row"><td colspan="2">${section.title}</td></tr>`;
     section.fields.forEach(f => {
       const val = entry[f.key] || '—';
-      html += `<tr>
-        <th>${f.label}</th>
-        <td class="${f.isNote ? 'note' : ''}">${f.isNote ? val + '/10' : val}</td>
-      </tr>`;
+      html += `
+        <tr>
+          <th>${f.label}</th>
+          <td class="${f.isNote ? 'note' : ''}">${f.isNote ? val + '/10' : val}</td>
+        </tr>`;
     });
   });
   html += '</table>';
   return html;
 }
 
-/** Rendre toutes les réponses */
 function renderResponses(responses) {
-  const list  = document.getElementById('responsesList');
+  const list = document.getElementById('responsesList');
   const empty = document.getElementById('emptyState');
   const count = document.getElementById('responseCount');
   if (!list) return;
@@ -248,13 +235,12 @@ function renderResponses(responses) {
   list.classList.remove('hidden');
   list.innerHTML = '';
 
-  // Afficher du plus récent au plus ancien
   [...responses].reverse().forEach(entry => {
     const card = document.createElement('div');
     card.className = 'response-card';
 
     const retour = entry.retour || '?';
-    const score  = entry.note_globale ? entry.note_globale + '/10' : '—';
+    const score = entry.note_globale ? entry.note_globale + '/10' : '—';
     const resume = entry.resume ? `"${entry.resume}"` : 'Pas de résumé';
 
     card.innerHTML = `
@@ -273,18 +259,16 @@ function renderResponses(responses) {
       </div>
     `;
 
-    // Toggle détail
     card.querySelector('.response-card-header').addEventListener('click', (e) => {
       if (e.target.classList.contains('btn-delete')) return;
       card.classList.toggle('open');
     });
 
-    // Suppression
     card.querySelector('.btn-delete').addEventListener('click', () => {
       if (!confirm('Supprimer cette réponse ?')) return;
       const updated = getResponses().filter(r => r.id !== entry.id);
       saveResponses(updated);
-      initAdmin(); // Rafraîchir la page admin
+      initAdmin();
     });
 
     list.appendChild(card);
@@ -292,7 +276,7 @@ function renderResponses(responses) {
 }
 
 function initAdmin() {
-  if (!document.getElementById('statsGrid')) return; // pas sur admin.html
+  if (!document.getElementById('statsGrid')) return;
   const responses = getResponses();
   renderStats(responses);
   renderResponses(responses);
@@ -316,40 +300,9 @@ const gateBtn = document.getElementById('gateBtn');
 const gateError = document.getElementById('gateError');
 const adminContent = document.getElementById('adminContent');
 
-// 🔑 Ton mot de passe ici
-const ADMIN_CODE = "onibi2026"; // change-le si tu veux
-
-gateBtn.addEventListener('click', () => {
-  if (gateInput.value.trim() === ADMIN_CODE) {
-    gateOverlay.classList.add('hidden');
-    adminContent.classList.remove('hidden');
-  } else {
-    gateError.classList.remove('hidden');
-    setTimeout(() => gateError.classList.add('hidden'), 2000);
-  }
-});
-
-// Permet d'appuyer sur "Entrée"
-gateInput.addEventListener('keypress', (e) => {
-  if (e.key === "Enter") {
-    gateBtn.click();
-  }
-});
-/* ============================================================
-   GATE D'ACCÈS ADMIN — MOT DE PASSE
-   ============================================================ */
-
-const gateOverlay = document.getElementById('adminGate');
-const gateInput = document.getElementById('gateInput');
-const gateBtn = document.getElementById('gateBtn');
-const gateError = document.getElementById('gateError');
-const adminContent = document.getElementById('adminContent');
-
-// On ne lance le système de mot de passe QUE si on est sur admin.html
 if (gateOverlay && gateInput && gateBtn && gateError && adminContent) {
 
-  // 🔑 Ton mot de passe ici
-  const ADMIN_CODE = "onibi2026"; // change-le si tu veux
+  const ADMIN_CODE = "onibi2026";
 
   gateBtn.addEventListener('click', () => {
     if (gateInput.value.trim() === ADMIN_CODE) {
@@ -361,7 +314,6 @@ if (gateOverlay && gateInput && gateBtn && gateError && adminContent) {
     }
   });
 
-  // Permet d'appuyer sur "Entrée"
   gateInput.addEventListener('keypress', (e) => {
     if (e.key === "Enter") {
       gateBtn.click();
