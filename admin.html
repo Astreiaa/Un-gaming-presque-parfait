@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Un Gaming Presque Parfait</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="admin-page">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <span class="logo">🎮 Un Gaming Presque Parfait</span>
+      <a href="index.html" class="btn-admin">← Questionnaire</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="admin-header">
+      <h1>Administration <span class="accent">des réponses</span></h1>
+      <p class="admin-subtitle">Toutes les notes reçues, moyennes automatiques.</p>
+    </div>
+
+    <!-- STATS GLOBALES -->
+    <div class="stats-grid" id="statsGrid">
+      <!-- Rempli par JS -->
+    </div>
+
+    <!-- LISTE DES RÉPONSES -->
+    <div class="responses-header">
+      <h2>Réponses individuelles</h2>
+      <span id="responseCount" class="badge">0 réponse</span>
+    </div>
+
+    <div id="responsesList" class="responses-list">
+      <!-- Rempli par JS -->
+    </div>
+
+    <!-- ÉTAT VIDE -->
+    <div id="emptyState" class="empty-state hidden">
+      <span class="empty-icon">🎮</span>
+      <p>Aucune réponse pour l'instant.<br />Partagez le questionnaire.</p>
+      <a href="index.html" class="btn-submit">Remplir le questionnaire</a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <span>Un Gaming Presque Parfait &mdash; aucun animal n'a été blessé lors de cette soirée.</span>
+    <a href="index.html">Questionnaire</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

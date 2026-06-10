@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Un Gaming Presque Parfait</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <span class="logo">🎮 Un Gaming Presque Parfait</span>
+      <a href="admin.html" class="btn-admin">Administration</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Note ta soirée <span class="accent">gaming</span></h1>
+    <p>Façon "Un Dîner Presque Parfait", mais pour les gens qui clutch à 3h du mat.</p>
+  </section>
+
+  <!-- FORM -->
+  <main class="container">
+    <form id="gamingForm">
+
+      <!-- 1. ACCUEIL -->
+      <div class="card">
+        <h2><span class="section-icon">⭐</span> Accueil dans le vocal</h2>
+        <div class="fields">
+          <label>Ressenti à l'arrivée
+            <textarea name="accueil_ressenti" placeholder="Chaleureux ? Ambiance de salle d'attente ?"></textarea>
+          </label>
+          <label>Première impression du groupe
+            <textarea name="accueil_impression" placeholder="En une phrase..."></textarea>
+          </label>
+          <label class="note-label">Note de l'accueil
+            <div class="rating-group" data-name="note_accueil"></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- 2. AMBIANCE -->
+      <div class="card">
+        <h2><span class="section-icon">😂</span> Ambiance générale</h2>
+        <div class="fields">
+          <label>Ambiance de la soirée
+            <textarea name="ambiance_ambiance" placeholder="Détendue, intense, bizarre ?"></textarea>
+          </label>
+          <label>Niveau de vanne
+            <textarea name="ambiance_vannes" placeholder="Du génie ou du désespoir pur ?"></textarea>
+          </label>
+          <label>Confort dans le vocal
+            <textarea name="ambiance_confort" placeholder="Est-ce que tu osais parler ?"></textarea>
+          </label>
+          <label class="note-label">Note de l'ambiance
+            <div class="rating-group" data-name="note_ambiance"></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- 3. DISCUSSIONS -->
+      <div class="card">
+        <h2><span class="section-icon">🎧</span> Discussions</h2>
+        <div class="fields">
+          <label>Sujets abordés
+            <textarea name="disc_sujets" placeholder="Gaming, life, complotisme léger ?"></textarea>
+          </label>
+          <label>Moment préféré
+            <textarea name="disc_moment_top" placeholder="Ce truc qui t'a fait sourire"></textarea>
+          </label>
+          <label>Moment WTF
+            <textarea name="disc_moment_wtf" placeholder="Ce truc qui t'a laissé sans voix"></textarea>
+          </label>
+          <label class="note-label">Note des discussions
+            <div class="rating-group" data-name="note_discussions"></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- 4. CASTING -->
+      <div class="card">
+        <h2><span class="section-icon">🧑‍🤝‍🧑</span> Le casting du vocal</h2>
+        <p class="card-subtitle">Une ligne par joueur, deux champs courts.</p>
+
+        <!-- Onibi -->
+        <div class="player-block">
+          <h3 class="player-name">Onibi</h3>
+          <div class="fields fields--row">
+            <label>Impression
+              <textarea name="onibi_impression" rows="2" placeholder="Premier ressenti"></textarea>
+            </label>
+            <label>Rôle / vibe
+              <textarea name="onibi_vibe" rows="2" placeholder="Le calme, le chaos, le coach ?"></textarea>
+            </label>
+          </div>
+          <label class="note-label">Note
+            <div class="rating-group" data-name="note_onibi"></div>
+          </label>
+        </div>
+
+        <!-- Ares -->
+        <div class="player-block">
+          <h3 class="player-name">Ares</h3>
+          <div class="fields fields--row">
+            <label>Impression
+              <textarea name="ares_impression" rows="2" placeholder="Premier ressenti"></textarea>
+            </label>
+            <label>Rôle / vibe
+              <textarea name="ares_vibe" rows="2" placeholder="Le calme, le chaos, le coach ?"></textarea>
+            </label>
+          </div>
+          <label class="note-label">Note
+            <div class="rating-group" data-name="note_ares"></div>
+          </label>
+        </div>
+
+        <!-- Rekirts -->
+        <div class="player-block">
+          <h3 class="player-name">Rekirts</h3>
+          <div class="fields fields--row">
+            <label>Impression
+              <textarea name="rekirts_impression" rows="2" placeholder="Premier ressenti"></textarea>
+            </label>
+            <label>Rôle / vibe
+              <textarea name="rekirts_vibe" rows="2" placeholder="Le calme, le chaos, le coach ?"></textarea>
+            </label>
+          </div>
+          <label class="note-label">Note
+            <div class="rating-group" data-name="note_rekirts"></div>
+          </label>
+        </div>
+
+        <!-- Astreia -->
+        <div class="player-block">
+          <h3 class="player-name">Astreia</h3>
+          <div class="fields fields--row">
+            <label>Impression
+              <textarea name="astreia_impression" rows="2" placeholder="Premier ressenti"></textarea>
+            </label>
+            <label>Rôle / vibe
+              <textarea name="astreia_vibe" rows="2" placeholder="Le calme, le chaos, le coach ?"></textarea>
+            </label>
+          </div>
+          <label class="note-label">Note
+            <div class="rating-group" data-name="note_astreia"></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- 5. SESSION DE JEU -->
+      <div class="card">
+        <h2><span class="section-icon">🎮</span> Session de jeu</h2>
+        <div class="fields">
+          <label>Ressenti global
+            <textarea name="jeu_ressenti" placeholder="Fun ? Frustrant ? Les deux ?"></textarea>
+          </label>
+          <label>Coordination de l'équipe
+            <textarea name="jeu_coordination" placeholder="Top, moyen ou chacun pour soi ?"></textarea>
+          </label>
+          <label>Niveau de chaos
+            <textarea name="jeu_chaos" placeholder="Controlled chaos ou déprime totale ?"></textarea>
+          </label>
+          <label>Moment clutch ou honteux
+            <textarea name="jeu_moment" placeholder="Le truc dont on va parler pendant 6 mois"></textarea>
+          </label>
+          <label class="note-label">Note de la session
+            <div class="rating-group" data-name="note_jeu"></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- 6. EXPÉRIENCE SOCIALE -->
+      <div class="card">
+        <h2><span class="section-icon">🍽️</span> Expérience sociale</h2>
+        <div class="fields">
+          <label>Confort général
+            <textarea name="social_confort" placeholder="Est-ce que tu te sentais à ta place ?"></textarea>
+          </label>
+          <label>Intégration dans le groupe
+            <textarea name="social_integration" placeholder="Inclus·e ou spectateur·ice ?"></textarea>
+          </label>
+          <label>Feeling global
+            <textarea name="social_feeling" placeholder="En un mot ou deux"></textarea>
+          </label>
+          <label class="note-label">Note de l'expérience sociale
+            <div class="rating-group" data-name="note_social"></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- 7. AVIS FINAL -->
+      <div class="card card--final">
+        <h2><span class="section-icon">🧁</span> Avis final</h2>
+        <div class="fields">
+
+          <label class="note-label">Tu reviendrais jouer avec nous ?
+            <div class="radio-group">
+              <label class="radio-option"><input type="radio" name="retour" value="Oui" required /><span>Oui</span></label>
+              <label class="radio-option"><input type="radio" name="retour" value="Non" /><span>Non</span></label>
+              <label class="radio-option"><input type="radio" name="retour" value="Peut-être" /><span>Peut-être</span></label>
+            </div>
+          </label>
+
+          <label>Résumé de ta soirée en une phrase
+            <textarea name="resume" placeholder="Une phrase. Juste une."></textarea>
+          </label>
+
+          <label class="note-label">Note globale
+            <div class="rating-group" data-name="note_globale"></div>
+          </label>
+
+          <label>Commentaire libre
+            <textarea name="commentaire" rows="4" placeholder="Ce que tu veux — on lit tout, promis."></textarea>
+          </label>
+
+        </div>
+
+        <button type="submit" class="btn-submit">Envoyer ma note 🚀</button>
+      </div>
+
+    </form>
+
+    <!-- SUCCESS MESSAGE -->
+    <div id="successMsg" class="success-msg hidden">
+      <span class="success-icon">✅</span>
+      <p>Note enregistrée. On t'a vu noter un <strong id="globalScore"></strong>/10.</p>
+      <a href="index.html" class="btn-back">Nouvelle réponse</a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <span>Un Gaming Presque Parfait &mdash; aucun animal n'a été blessé lors de cette soirée.</span>
+    <a href="admin.html">Administration</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
