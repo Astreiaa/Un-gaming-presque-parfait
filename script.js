@@ -335,3 +335,37 @@ gateInput.addEventListener('keypress', (e) => {
     gateBtn.click();
   }
 });
+/* ============================================================
+   GATE D'ACCÈS ADMIN — MOT DE PASSE
+   ============================================================ */
+
+const gateOverlay = document.getElementById('adminGate');
+const gateInput = document.getElementById('gateInput');
+const gateBtn = document.getElementById('gateBtn');
+const gateError = document.getElementById('gateError');
+const adminContent = document.getElementById('adminContent');
+
+// On ne lance le système de mot de passe QUE si on est sur admin.html
+if (gateOverlay && gateInput && gateBtn && gateError && adminContent) {
+
+  // 🔑 Ton mot de passe ici
+  const ADMIN_CODE = "onibi2026"; // change-le si tu veux
+
+  gateBtn.addEventListener('click', () => {
+    if (gateInput.value.trim() === ADMIN_CODE) {
+      gateOverlay.classList.add('hidden');
+      adminContent.classList.remove('hidden');
+    } else {
+      gateError.classList.remove('hidden');
+      setTimeout(() => gateError.classList.add('hidden'), 2000);
+    }
+  });
+
+  // Permet d'appuyer sur "Entrée"
+  gateInput.addEventListener('keypress', (e) => {
+    if (e.key === "Enter") {
+      gateBtn.click();
+    }
+  });
+
+}
