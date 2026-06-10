@@ -412,3 +412,22 @@ textarea::placeholder { color: #44445a; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .site-footer { flex-direction: column; gap: 6px; text-align: center; }
 }
+// --- Gate / code d'accès admin ---
+const gateOverlay = document.getElementById('adminGate');
+const gateInput = document.getElementById('gateInput');
+const gateBtn = document.getElementById('gateBtn');
+const gateError = document.getElementById('gateError');
+const adminContent = document.getElementById('adminContent');
+
+// Ton code secret ici :
+const ADMIN_CODE = "onibi2026"; // change-le si tu veux
+
+gateBtn.addEventListener('click', () => {
+  if (gateInput.value === ADMIN_CODE) {
+    gateOverlay.classList.add('hidden');
+    adminContent.classList.remove('hidden');
+  } else {
+    gateError.classList.remove('hidden');
+    setTimeout(() => gateError.classList.add('hidden'), 2000);
+  }
+});
